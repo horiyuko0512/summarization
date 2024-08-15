@@ -26,8 +26,12 @@ public class SecurityConfig {
 						.requestMatchers("/register").permitAll()
 						.anyRequest().authenticated())
 				.logout(logout -> logout
-						.permitAll());
-
+						.permitAll())
+				.sessionManagement(session -> session
+						.sessionFixation(sessionFixation -> sessionFixation
+								.migrateSession())
+						.maximumSessions(1)
+						.maxSessionsPreventsLogin(true));
 			return http.build();
 		}
 
