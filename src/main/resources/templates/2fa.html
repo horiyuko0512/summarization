@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Two-Factor Authentication</title>
+</head>
+<body>
+    <h2>Enter Two-Factor Authentication Code</h2>
+    <div th:if="${error}">
+        <p th:text="${error}"></p>
+    </div>
+    <form th:action="@{/2fa/}" method="post">
+        <input type="text" name="code" placeholder="Enter code" required>
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>

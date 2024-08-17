@@ -7,13 +7,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import com.warrenstrange.googleauth.GoogleAuthenticator;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+		@Bean
+    public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+		@Bean
+    public GoogleAuthenticator googleAuthenticator() {
+        return new GoogleAuthenticator();
     }
 
 		@Bean
@@ -21,9 +33,10 @@ public class SecurityConfig {
 			http
 				.formLogin(login -> login
 						.loginPage("/login")
+						.successHandler(customAuthenticationSuccessHandler())
 						.permitAll())
 				.authorizeHttpRequests(authz -> authz
-						.requestMatchers("/register").permitAll()
+						.requestMatchers("/register", "/2fa/**").permitAll()
 						.anyRequest().authenticated())
 				.logout(logout -> logout
 						.permitAll())

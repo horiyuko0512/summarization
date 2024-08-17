@@ -7,6 +7,9 @@
 </head>
 <body>
   <h1>Index</h1>
+  <p>Choose one.</p>
+  <div><a th:href="@{/2fa/enable}">Enable Two-Factor Authentication</a></div>
+  <div><a th:href="@{/2fa/disable}">Disable Two-Factor Authentication</a></div>
   <form th:action="@{/logout}" method="post">
     <input type="submit" value="logout">
   </form>
