@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Enable Two-Factor Authentication</title>
+</head>
+<body>
+    <h2>Enable Two-Factor Authentication</h2>
+    <p>Scan this QR code with your authenticator app:</p>
+    <img th:src="@{/2fa/qrcode}" alt="QR Code">
+    <p>Please use this key to set up your authenticator app.</p>
+    <a th:href="@{/index}">Return to Home</a>
+</body>
+</html>
